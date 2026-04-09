@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Local Visibility Partner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:      #080a0d;
+  --bg2:     #0c0f14;
+  --bg3:     #10141a;
+  --bg4:     #161c24;
+  --mint:    #4ddb96;
+  --mint2:   #2ab870;
+  --gold:    #f0c040;
+  --red:     #e85d5d;
+  --blue:    #5ab4f5;
+  --blue2:   #2d8fe0;
+  --blue3:   rgba(90,180,245,0.12);
+  --purple:  #b48aff;
+  --purple2: #8b5cf6;
+  --purple3: rgba(180,138,255,0.12);
+  --white:   #eef2f8;
+  --gray:    #b0bcd0;
+  --body:    rgba(238,242,248,0.82);
+  --rule:    rgba(255,255,255,0.09);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--white); overflow-x:hidden; -webkit-font-smoothing:antialiased; }
+
+.f-display { font-family:'DM Serif Display',serif; font-weight:900; line-height:1.0; letter-spacing:-0.02em; }
+.f-italic  { font-family:'DM Serif Display',serif; font-weight:700; font-style:italic; }
+.f-stat    { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-variant-numeric:tabular-nums; letter-spacing:-0.01em; }
+.f-label   { font-family:'Barlow',sans-serif; font-weight:600; font-size:11px; letter-spacing:0.2em; text-transform:uppercase; }
+
+/* ── NAV ── */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:200;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 56px; height:60px;
+  background:rgba(8,10,13,0.95); backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(180,138,255,0.2);
+}
+.nav-brand {
+  font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:13px; letter-spacing:0.16em; text-transform:uppercase;
+  background: linear-gradient(90deg, var(--mint), var(--blue));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+}
+.nav-links { display:flex; gap:34px; list-style:none; }
+.nav-links a { font-family:'Barlow',sans-serif; font-weight:500; font-size:12px; letter-spacing:0.07em; text-transform:uppercase; color:rgba(238,242,248,0.55); text-decoration:none; transition:color 0.2s; }
+.nav-links a:hover { color:var(--white); }
+
+/* ── SECTIONS ── */
+section { min-height:100vh; display:flex; flex-direction:column; justify-content:center; padding:120px 80px 100px; border-bottom:1px solid var(--rule); }
+
+.s-label { display:flex; align-items:center; gap:12px; margin-bottom:48px; }
+.s-label::before { content:''; width:24px; height:1px; }
+#hero      .s-label::before { background:var(--mint); }
+#problem   .s-label::before { background:var(--gold); }
+#system    .s-label::before { background:var(--blue); }
+#offers    .s-label::before { background:var(--purple); }
+#numbers   .s-label::before { background:var(--gold); }
+#advantages .s-label::before { background: linear-gradient(90deg,var(--purple),var(--blue)); }
+#path      .s-label::before { background:var(--purple); }
+#closing   .s-label::before { background: linear-gradient(90deg,var(--blue),var(--mint)); }
+
+/* ── HERO ── */
+#hero {
+  justify-content:flex-end; padding-bottom:108px; min-height:100vh;
+  background: radial-gradient(ellipse at 80% 20%, rgba(139,92,246,0.12) 0%, transparent 55%),
+              radial-gradient(ellipse at 10% 80%, rgba(45,143,224,0.08) 0%, transparent 45%),
+              var(--bg);
+}
+
+.hero-eyebrow { font-family:'Barlow',sans-serif; font-weight:600; font-size:11px; letter-spacing:0.22em; text-transform:uppercase; color:var(--mint); margin-bottom:36px; display:flex; align-items:center; gap:10px; }
+.hero-eyebrow::before { content:'▶'; font-size:8px; }
+
+h1 { font-size:clamp(34px,4.2vw,60px); max-width:920px; margin-bottom:36px; line-height:1.08; }
+.hero-mint { color:var(--mint); }
+.hero-blue { color:var(--blue); }
+.hero-purple { color:var(--purple); }
+
+.hero-body { font-size:17px; font-weight:300; color:var(--body); max-width:480px; line-height:1.78; margin-bottom:44px; }
+
+.tags { display:flex; flex-wrap:wrap; gap:10px; }
+.tag { padding:8px 18px; border:1px solid rgba(255,255,255,0.1); border-radius:100px; font-family:'Barlow',sans-serif; font-weight:500; font-size:12px; letter-spacing:0.04em; color:rgba(238,242,248,0.55); transition:all 0.25s; cursor:default; }
+.tag:nth-child(1):hover { border-color:var(--mint);   color:var(--mint); }
+.tag:nth-child(2):hover { border-color:var(--blue);   color:var(--blue); }
+.tag:nth-child(3):hover { border-color:var(--purple); color:var(--purple); }
+.tag:nth-child(4):hover { border-color:var(--blue);   color:var(--blue); }
+.tag:nth-child(5):hover { border-color:var(--mint);   color:var(--mint); }
+
+/* ── HEADINGS ── */
+h2 { font-size:clamp(30px,3.8vw,54px); margin-bottom:28px; line-height:1.08; }
+h2 em { font-style:normal; }
+h3 { font-family:'Barlow',sans-serif; font-weight:600; font-size:17px; margin-bottom:10px; color:var(--white); }
+p  { font-size:15px; line-height:1.78; color:var(--body); max-width:600px; }
+
+/* per-section h2 em colors */
+#hero      h2 em, #hero      h1 em { color:var(--mint); }
+#problem   h2 em { color:var(--gold); }
+#system    h2 em { color:var(--blue); }
+#offers    h2 em { color:var(--purple); }
+#numbers   h2 em { color:var(--gold); }
+#advantages h2 em { color:var(--blue); }
+#path      h2 em { color:var(--purple); }
+#closing   h2 em { color:var(--mint); }
+
+/* ── TWO COL ── */
+.two-col { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
+
+/* ── STAT GRID ── */
+.stat-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; margin-top:80px; background:var(--rule); border:1px solid var(--rule); }
+.stat-cell { padding:40px 32px; background:var(--bg); transition:background 0.2s; }
+.stat-cell:hover { background:var(--bg2); cursor:default; }
+.stat-num { font-size:54px; line-height:1; margin-bottom:12px; }
+.stat-lbl { font-family:'Barlow',sans-serif; font-weight:400; font-size:13px; color:var(--body); line-height:1.5; }
+.gold-stats   .stat-num { color:var(--gold); }
+.purple-stats .stat-num { color:var(--purple); }
+.multi-stats .stat-cell:nth-child(1) .stat-num { color:var(--mint); }
+.multi-stats .stat-cell:nth-child(2) .stat-num { color:var(--blue); }
+.multi-stats .stat-cell:nth-child(3) .stat-num { color:var(--purple); }
+.multi-stats .stat-cell:nth-child(4) .stat-num { color:var(--gold); }
+
+/* ── MISC ── */
+.stat-cell { border-bottom: none; }
+
+/* ── PROBLEM CARDS ── */
+.problem-cards { display:flex; flex-direction:column; gap:16px; }
+.pcard { display:flex; gap:20px; padding:26px 30px; background:var(--bg2); border:1px solid var(--rule); border-left:3px solid transparent; transition:background 0.2s,transform 0.2s; border-radius:2px; }
+.pcard:hover { background:var(--bg3); transform:translateX(3px); }
+.pcard.c1 { border-left-color:var(--red); }
+.pcard.c2 { border-left-color:var(--gold); }
+.pcard.c3 { border-left-color:var(--blue); }
+.pcard-icon {
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:700;
+  font-size:13px;
+  letter-spacing:0.12em;
+  flex-shrink:0;
+  margin-top:4px;
+  min-width:28px;
+}
+.pcard.c1 .pcard-icon { color:var(--red); }
+.pcard.c2 .pcard-icon { color:var(--gold); }
+.pcard.c3 .pcard-icon { color:var(--blue); }
+.pcard h3 { font-size:16px; margin-bottom:6px; }
+.pcard p  { font-size:14px; color:var(--body); max-width:none; line-height:1.65; }
+
+/* ── FLYWHEEL ── */
+.flywheel { display:flex; flex-direction:column; }
+.fw-step  { display:flex; align-items:stretch; }
+.fw-line  { display:flex; flex-direction:column; align-items:center; width:32px; flex-shrink:0; }
+.fw-dot   { width:9px; height:9px; border-radius:50%; flex-shrink:0; margin-top:8px; }
+.fw-step:nth-child(1) .fw-dot { background:var(--mint); }
+.fw-step:nth-child(2) .fw-dot { background:var(--blue); }
+.fw-step:nth-child(3) .fw-dot { background:var(--purple); }
+.fw-step:nth-child(4) .fw-dot { background:var(--blue); }
+.fw-step:nth-child(5) .fw-dot { background:var(--mint); }
+.fw-conn  { width:1px; flex:1; min-height:32px; margin:4px 0; }
+.fw-step:nth-child(1) .fw-conn { background:linear-gradient(to bottom,var(--mint),var(--blue)); }
+.fw-step:nth-child(2) .fw-conn { background:linear-gradient(to bottom,var(--blue),var(--purple)); }
+.fw-step:nth-child(3) .fw-conn { background:linear-gradient(to bottom,var(--purple),var(--blue)); }
+.fw-step:nth-child(4) .fw-conn { background:linear-gradient(to bottom,var(--blue),var(--mint)); }
+.fw-body  { padding:0 0 36px 20px; }
+.fw-body p { font-size:14px; color:var(--body); max-width:none; line-height:1.65; }
+.fw-step:nth-child(1) .fw-body h3 { color:var(--mint); }
+.fw-step:nth-child(2) .fw-body h3 { color:var(--blue); }
+.fw-step:nth-child(3) .fw-body h3 { color:var(--purple); }
+.fw-step:nth-child(4) .fw-body h3 { color:var(--blue); }
+.fw-step:nth-child(5) .fw-body h3 { color:var(--mint); }
+.fw-body h3 { font-size:13px; text-transform:uppercase; letter-spacing:0.12em; font-family:'Barlow',sans-serif; font-weight:600; margin-bottom:6px; }
+
+/* ── TIERS ── */
+.tiers { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--rule); border:1px solid var(--rule); margin-top:60px; }
+.tier { padding:36px 28px; background:var(--bg); transition:background 0.2s; }
+.tier:hover { background:var(--bg2); }
+.tier.featured { background:linear-gradient(160deg,rgba(180,138,255,0.1),rgba(90,180,245,0.06)); border:1px solid rgba(180,138,255,0.32); margin:-1px; box-shadow:0 0 40px rgba(180,138,255,0.08) inset; }
+.tier-badge { display:inline-block; font-family:'Barlow',sans-serif; font-weight:600; font-size:10px; letter-spacing:0.14em; text-transform:uppercase; padding:4px 12px; border-radius:100px; margin-bottom:18px; }
+.tier:not(.featured) .tier-badge { background:rgba(255,255,255,0.06); color:rgba(238,242,248,0.45); }
+.tier.featured .tier-badge { background:rgba(180,138,255,0.18); color:var(--purple); }
+.tier-name  { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:21px; letter-spacing:0.03em; color:var(--white); margin-bottom:8px; }
+.tier-price { font-size:28px; line-height:1.1; margin-bottom:22px; letter-spacing:-0.01em; }
+.tier:nth-child(1) .tier-price { color:var(--mint); }
+.tier:nth-child(2) .tier-price { color:var(--purple); }
+.tier:nth-child(3) .tier-price { color:var(--blue); }
+.tier:nth-child(4) .tier-price { color:var(--gold); }
+.tier-price span { font-size:13px; color:var(--gray); margin-left:4px; font-weight:300; font-family:'Inter',sans-serif; }
+.tier-features { list-style:none; display:flex; flex-direction:column; gap:10px; }
+.tier-features li { font-size:13px; color:var(--body); display:flex; gap:10px; align-items:flex-start; line-height:1.5; }
+.tier:nth-child(1) .tier-features li::before { content:'→'; color:var(--mint);   flex-shrink:0; font-size:11px; }
+.tier:nth-child(2) .tier-features li::before { content:'→'; color:var(--purple); flex-shrink:0; font-size:11px; }
+.tier:nth-child(3) .tier-features li::before { content:'→'; color:var(--blue);   flex-shrink:0; font-size:11px; }
+.tier:nth-child(4) .tier-features li::before { content:'→'; color:var(--gold);   flex-shrink:0; font-size:11px; }
+
+/* ── CALLOUT BOX ── */
+.callout-box { margin-top:36px; padding:28px 36px; border:1px solid rgba(180,138,255,0.18); background:rgba(180,138,255,0.05); max-width:800px; border-radius:2px; }
+.callout-box p { font-size:15px; color:var(--body); max-width:none; line-height:1.75; }
+.callout-box strong { color:var(--purple); font-weight:600; }
+
+/* ── REVENUE TABLE ── */
+.rev-table { margin-top:60px; border:1px solid var(--rule); overflow:hidden; }
+.rev-head { display:grid; grid-template-columns:160px repeat(3,1fr); background:var(--bg3); border-bottom:1px solid var(--rule); }
+.rh { padding:16px 24px; font-family:'Barlow',sans-serif; font-weight:600; font-size:11px; letter-spacing:0.16em; text-transform:uppercase; border-right:1px solid var(--rule); }
+.rh:last-child { border-right:none; }
+.rh.con  { color:#c084a0; }
+.rh.base { color:var(--gold); }
+.rh.str  { color:var(--blue); }
+.rev-row { display:grid; grid-template-columns:160px repeat(3,1fr); border-bottom:1px solid rgba(255,255,255,0.04); transition:background 0.15s; }
+.rev-row:hover { background:rgba(255,255,255,0.025); }
+.rev-row:last-child { border-bottom:none; background:rgba(255,255,255,0.025); }
+.rev-milestone { display:grid; grid-template-columns:160px repeat(3,1fr); border-bottom:2px solid rgba(255,255,255,0.1); border-top:2px solid rgba(255,255,255,0.1); background:rgba(255,255,255,0.04); }
+.rv-label { padding:14px 24px; font-family:'Barlow',sans-serif; font-weight:500; font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:rgba(238,242,248,0.45); border-right:1px solid rgba(255,255,255,0.06); font-style:italic; }
+.rv-label.con, .rv-label.base, .rv-label.str { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:16px; font-style:italic; letter-spacing:0.02em; text-transform:none; padding:14px 24px; color:var(--mint) !important; }
+.rv-label:last-child { border-right:none; }
+.rv-label.con  { color:rgba(192,132,160,0.7); }
+.rv-label.base { color:rgba(240,192,64,0.7); }
+.rv-label.str  { color:rgba(90,180,245,0.7); }
+.rd { padding:18px 24px; font-family:'Barlow',sans-serif; font-size:14px; font-variant-numeric:tabular-nums; border-right:1px solid rgba(255,255,255,0.04); }
+.rd:last-child { border-right:none; }
+.rd.period { font-family:'Inter',sans-serif; font-weight:500; color:var(--white); }
+.rd.con  { color:#c084a0; }
+.rd.base { color:var(--gold); font-weight:500; }
+.rd.str  { color:var(--blue); font-weight:500; }
+.rd.er { font-family:'Barlow Condensed',sans-serif; font-size:16px; font-weight:700; letter-spacing:0.04em; }
+.rd.er.period { font-family:'Barlow',sans-serif; font-weight:600; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--gray); }
+.rd.er.con  { color:#c084a0; }
+.rd.er.base { color:var(--gold); }
+.rd.er.str  { color:var(--blue); }
+
+/* ── EXIT TRIGGER ── */
+.exit-block { margin-top:44px; padding:40px 48px; display:flex; align-items:center; gap:56px; border:1px solid rgba(180,138,255,0.25); background:var(--purple3); }
+.exit-num { font-size:72px; line-height:1; white-space:nowrap; background:linear-gradient(135deg,var(--purple),var(--blue)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.exit-num sub { font-size:22px; margin-left:6px; }
+.exit-copy h3 { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:22px; letter-spacing:0.04em; color:var(--white); margin-bottom:10px; }
+.exit-copy p  { font-size:14px; max-width:400px; line-height:1.7; color:var(--body); }
+
+/* ── ADVANTAGES ── */
+.adv-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--rule); border:1px solid var(--rule); margin-top:56px; }
+.adv { padding:40px 36px; background:var(--bg); transition:background 0.2s; }
+.adv:hover { background:var(--bg2); }
+.adv-n { font-family:'Barlow',sans-serif; font-weight:600; font-size:11px; letter-spacing:0.2em; text-transform:uppercase; margin-bottom:20px; }
+.adv:nth-child(1) .adv-n { color:var(--mint); }
+.adv:nth-child(2) .adv-n { color:var(--blue); }
+.adv:nth-child(3) .adv-n { color:var(--purple); }
+.adv:nth-child(4) .adv-n { color:var(--blue); }
+.adv:nth-child(5) .adv-n { color:var(--purple); }
+.adv:nth-child(6) .adv-n { color:var(--mint); }
+.adv h3 { font-size:17px; margin-bottom:10px; }
+.adv p  { font-size:14px; color:var(--body); max-width:none; line-height:1.7; }
+
+/* ── SECTION BACKGROUNDS (subtle, not full swaps) ── */
+#system {
+  background: radial-gradient(ellipse at 100% 50%, rgba(90,180,245,0.06) 0%, transparent 55%),
+              radial-gradient(ellipse at 0% 100%, rgba(77,219,150,0.04) 0%, transparent 45%), var(--bg);
+}
+#offers {
+  background: radial-gradient(ellipse at 0% 30%, rgba(180,138,255,0.07) 0%, transparent 50%),
+              radial-gradient(ellipse at 100% 80%, rgba(90,180,245,0.05) 0%, transparent 45%), var(--bg);
+}
+#path {
+  background: radial-gradient(ellipse at 50% 0%, rgba(180,138,255,0.08) 0%, transparent 50%), var(--bg);
+}
+
+/* ── TIMELINE ── */
+.timeline { display:grid; grid-template-columns:repeat(4,1fr); margin-top:56px; border:1px solid var(--rule); }
+.t-phase { padding:40px 32px; border-right:1px solid var(--rule); transition:background 0.2s; }
+.t-phase:last-child { border-right:none; }
+.t-phase:nth-child(1) { border-top:3px solid var(--mint); }
+.t-phase:nth-child(2) { border-top:3px solid var(--blue); }
+.t-phase:nth-child(3) { border-top:3px solid var(--purple); }
+.t-phase:nth-child(4) { border-top:3px solid var(--blue); }
+.t-phase:hover { background:var(--bg2); }
+.t-lbl { font-family:'Barlow',sans-serif; font-weight:600; font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:var(--gray); margin-bottom:12px; }
+.t-title { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:19px; letter-spacing:0.04em; color:var(--white); margin-bottom:16px; }
+.t-phase:nth-child(1) .t-title { color:var(--mint); }
+.t-phase:nth-child(2) .t-title { color:var(--blue); }
+.t-phase:nth-child(3) .t-title { color:var(--purple); }
+.t-phase:nth-child(4) .t-title { color:var(--blue); }
+.t-items { list-style:none; display:flex; flex-direction:column; gap:9px; }
+.t-items li { font-size:13px; color:var(--body); display:flex; gap:10px; align-items:flex-start; line-height:1.5; }
+.t-items li::before { content:'—'; opacity:0.3; flex-shrink:0; }
+
+/* ── WHY LIST ── */
+.why-list { margin-top:48px; border-top:1px solid var(--rule); }
+.why-item { display:grid; grid-template-columns:72px 1fr; border-bottom:1px solid var(--rule); transition:background 0.15s; }
+.why-item:hover { background:rgba(255,255,255,0.015); }
+.why-n { font-family:'Barlow',sans-serif; font-weight:600; font-size:11px; letter-spacing:0.2em; padding:24px 0; }
+.why-item:nth-child(1) .why-n { color:var(--mint); }
+.why-item:nth-child(2) .why-n { color:var(--blue); }
+.why-item:nth-child(3) .why-n { color:var(--purple); }
+.why-item:nth-child(4) .why-n { color:var(--blue); }
+.why-c { padding:22px 0; }
+.why-c h3 { font-size:17px; margin-bottom:7px; }
+.why-c p  { font-size:14px; color:var(--body); max-width:680px; line-height:1.7; }
+
+/* ── CLOSING ── */
+#closing {
+  text-align:center; align-items:center; border-bottom:none;
+  background: radial-gradient(ellipse at 30% 50%, rgba(90,180,245,0.07) 0%, transparent 50%),
+              radial-gradient(ellipse at 70% 50%, rgba(180,138,255,0.07) 0%, transparent 50%),
+              radial-gradient(ellipse at 50% 0%, rgba(77,219,150,0.05) 0%, transparent 40%), var(--bg);
+}
+.closing-stats { display:flex; gap:64px; justify-content:center; margin-top:56px; flex-wrap:wrap; }
+.cstat { text-align:center; }
+.cstat .num { font-size:42px; display:block; line-height:1; margin-bottom:10px; }
+.cstat:nth-child(1) .num { color:var(--mint); }
+.cstat:nth-child(2) .num { color:var(--blue); }
+.cstat:nth-child(3) .num { color:var(--purple); }
+.cstat:nth-child(4) .num { color:var(--gold); }
+.cstat .lbl { font-family:'Barlow',sans-serif; font-weight:600; font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--gray); }
+
+/* ── FOOTER ── */
+footer { padding:28px 80px; border-top:1px solid rgba(180,138,255,0.15); display:flex; justify-content:space-between; align-items:center; background:var(--bg); }
+.ft-brand { font-family:'Barlow',sans-serif; font-weight:500; font-size:12px; letter-spacing:0.06em; color:rgba(238,242,248,0.4); }
+.ft-meta  { font-family:'Barlow',sans-serif; font-size:12px; color:rgba(238,242,248,0.3); }
+
+/* ── SYS NOTE ── */
+.sys-note { display:grid; grid-template-columns:1fr 1fr; gap:2px; margin-top:48px; background:var(--rule); }
+.sn { padding:32px 28px; background:var(--bg2); }
+.sn:nth-child(1) .sn-num { color:var(--blue); }
+.sn:nth-child(2) .sn-num { color:var(--purple); }
+.sn-num { font-size:40px; line-height:1; margin-bottom:8px; }
+.sn-lbl { font-size:13px; color:var(--body); line-height:1.5; }
+
+/* ── ANIMATIONS ── */
+.fade { opacity:0; transform:translateY(24px); transition:opacity 0.7s ease,transform 0.7s ease; }
+.fade.in { opacity:1; transform:translateY(0); }
+.d1 { transition-delay:0.1s; }
+.d2 { transition-delay:0.2s; }
+.d3 { transition-delay:0.3s; }
+.d4 { transition-delay:0.4s; }
+
+::selection { background:rgba(180,138,255,0.25); color:var(--white); }
+::-webkit-scrollbar { width:3px; }
+::-webkit-scrollbar-track { background:var(--bg); }
+::-webkit-scrollbar-thumb { background:linear-gradient(var(--purple2),var(--blue2)); border-radius:2px; }
+
+@media(max-width:960px){
+  section{padding:100px 32px;}
+  nav{padding:0 24px;}
+  .nav-links{display:none;}
+  .two-col{grid-template-columns:1fr;gap:48px;}
+  .tiers{grid-template-columns:1fr 1fr;}
+  .adv-grid{grid-template-columns:1fr;}
+  .timeline{grid-template-columns:1fr 1fr;}
+  .closing-stats{gap:40px;flex-wrap:wrap;}
+  footer{flex-direction:column;gap:12px;text-align:center;}
+  .stat-grid{grid-template-columns:1fr 1fr;}
+  .rev-head,.rev-row{grid-template-columns:100px repeat(3,1fr);}
+  .exit-block{flex-direction:column;gap:24px;}
+  .sys-note{grid-template-columns:1fr 1fr;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">Local Visibility Partner</div>
+  <ul class="nav-links">
+    <li><a href="#problem">The Problem</a></li>
+    <li><a href="#system">The System</a></li>
+    <li><a href="#offers">Offers</a></li>
+    <li><a href="#numbers">Numbers</a></li>
+    <li><a href="#advantages">Why We Win</a></li>
+    <li><a href="#path">The Path</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="s-label fade"><span class="f-label" style="color:var(--gray);">Local Visibility Partner &nbsp;·&nbsp; 2026</span></div>
+  <h1 class="f-display fade d1">
+    Built on a problem<br>
+    every business has—<br>
+    <span class="hero-purple">and almost none solve.</span>
+  </h1>
+  <p class="hero-body fade d2">The businesses getting called first aren't always the best at the work. They just look more credible, more active, and more trustworthy online. This business builds that presence — for them.</p>
+  <div class="tags fade d3">
+    <span class="tag">Local Service Businesses</span>
+    <span class="tag">Recurring Revenue</span>
+    <span class="tag">Authority &amp; Visibility Systems</span>
+    <span class="tag">BNI Acquisition Channel</span>
+    <span class="tag">Zero Capital Required</span>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section id="problem">
+  <div class="s-label fade"><span class="f-label" style="color:var(--gray);">The Market</span></div>
+  <div class="two-col">
+    <div>
+      <h2 class="f-display fade">Better businesses are <em>losing</em> to competitors who simply look better.</h2>
+      <p class="fade d1">The competitor with 200 Google reviews at 4.8 gets called first. The business whose page looks active gets the job. The company that shows up in the neighborhood group gets the referral. None of that has anything to do with the quality of the work.</p>
+      <p class="fade d2" style="margin-top:16px;">Gen Z is now fully in both the consumer and labor market — the first generation that researches entirely on social before making any decision. They don't call first. They scroll first. That's not a trend. That's the new baseline.</p>
+    </div>
+    <div class="problem-cards fade d2">
+      <div class="pcard c1">
+        <div class="pcard-icon">01</div>
+        <div><h3>The Visibility Problem</h3><p>The competitor who looks more established online gets the call — regardless of who actually does better work. Perception is the whole game before the phone rings.</p></div>
+      </div>
+      <div class="pcard c2">
+        <div class="pcard-icon">02</div>
+        <div><h3>The Trust Problem</h3><p>Without visible authority, price is the only differentiator. The cheapest option always wins that conversation — and the best operators always lose it.</p></div>
+      </div>
+      <div class="pcard c3">
+        <div class="pcard-icon">03</div>
+        <div><h3>The Talent Problem</h3><p>Good candidates research a company before they apply. An inactive page reads as instability. And a bad hire in the trades costs $3,000–7,000. Most owners never connect these dots until after it hurts.</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="stat-grid gold-stats fade d3">
+    <div class="stat-cell"><div class="stat-num f-stat">93%</div><div class="stat-lbl">Of consumers say online reviews directly influence their purchasing decisions</div></div>
+    <div class="stat-cell"><div class="stat-num f-stat">60%</div><div class="stat-lbl">Of product discovery now happens on social media — officially surpassing Google Search</div></div>
+    <div class="stat-cell"><div class="stat-num f-stat">88%</div><div class="stat-lbl">Of consumers would use a business that replies to all its reviews — vs. just 47% for one that never responds</div></div>
+    <div class="stat-cell"><div class="stat-num f-stat">49%</div><div class="stat-lbl">Faster annual revenue growth for companies that prioritize video content over static posts and text</div></div>
+  </div>
+</section>
+
+<!-- SYSTEM -->
+<section id="system">
+  <div class="s-label fade"><span class="f-label" style="color:var(--gray);">The Solution</span></div>
+  <div class="two-col">
+    <div>
+      <h2 class="f-display fade">Not content.<br><em>Infrastructure.</em></h2>
+      <p class="fade d1">Other agencies post. This business builds infrastructure. Content that ranks. Reviews that compound. A presence that pre-sells both customers and future employees — simultaneously. Nothing requires the owner to be on camera or think about marketing.</p>
+      <p class="fade d2" style="margin-top:16px;">Every 30 days, a single report shows exactly what moved — keyword rankings, review growth, follower gains, leads traced to content. Cancellation starts to feel like turning off something that's working.</p>
+      <div class="sys-note fade d3">
+        <div class="sn"><div class="sn-num f-stat">10–15</div><div class="sn-lbl">Clients sustainable for a solo operator with this production system</div></div>
+        <div class="sn"><div class="sn-num f-stat">2–3×</div><div class="sn-lbl">The capacity of a comparable operation without this infrastructure</div></div>
+      </div>
+    </div>
+    <div class="flywheel fade d2">
+      <div class="fw-step"><div class="fw-line"><div class="fw-dot"></div><div class="fw-conn"></div></div><div class="fw-body"><h3>Content Builds Visibility</h3><p>SEO blog posts, social content, Google Business Profile posts, and short-form video — all built from a single monthly conversation. No camera. No copywriting. No marketing decisions.</p></div></div>
+      <div class="fw-step"><div class="fw-line"><div class="fw-dot"></div><div class="fw-conn"></div></div><div class="fw-body"><h3>Visibility Builds Trust</h3><p>Employee spotlights. Customer reviews. Expertise content that positions the owner as the authority in their market. The page builds trust with everyone who lands on it — whether they're looking to hire or looking to buy.</p></div></div>
+      <div class="fw-step"><div class="fw-line"><div class="fw-dot"></div><div class="fw-conn"></div></div><div class="fw-body"><h3>Signal Monitoring Captures Intent</h3><p>An algorithm monitors Facebook Groups and Nextdoor 24/7 for buying-intent posts. The moment someone asks "anyone know a good cleaner?" — the client gets the alert and a pre-written reply. First to respond wins. Every time.</p></div></div>
+      <div class="fw-step"><div class="fw-line"><div class="fw-dot" style="background:var(--gold);"></div><div class="fw-conn" style="background:linear-gradient(to bottom,var(--gold),var(--purple));"></div></div><div class="fw-body"><h3 style="color:var(--gold);">DM Engagement Runs in the Background</h3><p>Automated DM flows — written in the owner's voice — greet inbound messages, qualify leads with 2–3 questions, and route warm prospects to the owner with full conversation context. Comments get drafted responses within the same window. The owner is notified within 60 seconds of every inbound DM. They only touch conversations that are already warm.</p></div></div>
+      <div class="fw-step"><div class="fw-line"><div class="fw-dot"></div><div class="fw-conn"></div></div><div class="fw-body"><h3>Trust Attracts Talent</h3><p>A page full of culture content and customer proof pre-sells the job before anyone applies. Community members forward the opportunity to their network. When someone does apply, the owner gets a text within 60 seconds.</p></div></div>
+      <div class="fw-step"><div class="fw-line"><div class="fw-dot" style="background:var(--mint);"></div></div><div class="fw-body"><h3 style="color:var(--mint);">Assets Compound Over Time</h3><p>A Facebook post disappears in 48 hours. A well-optimized blog post generates leads for three years. The system is designed to compound — every asset built makes the next one more powerful.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- OFFERS -->
+<section id="offers">
+  <div class="s-label fade"><span class="f-label" style="color:var(--gray);">The Offer Stack</span></div>
+  <h2 class="f-display fade">One entry point.<br><em>A ladder that climbs itself.</em></h2>
+  <p class="fade d1">Clients start where they're comfortable and upgrade when they've seen what works. Nobody gets pitched the full stack on day one. The results do the selling.</p>
+  <div class="tiers fade d2">
+    <div class="tier">
+      <div class="tier-badge">Entry Point</div>
+      <div class="tier-name">Visibility Pilot</div>
+      <div class="tier-price f-stat">$500–800<span>/mo</span></div>
+      <ul class="tier-features">
+        <li>12–16 posts/month across 2 platforms</li>
+        <li>Captions written in their voice</li>
+        <li>Content from job photos + onboarding call</li>
+        <li>Consistent posting — pages stay active</li>
+        <li>Monthly check-in summary</li>
+      </ul>
+    </div>
+    <div class="tier featured">
+      <div class="tier-badge">Core Offer</div>
+      <div class="tier-name">Visibility Foundation</div>
+      <div class="tier-price f-stat">$1,200–1,500<span>/mo</span></div>
+      <ul class="tier-features">
+        <li>4 SEO blog posts targeting local search</li>
+        <li>Google Business Profile management</li>
+        <li>Review generation + response system</li>
+        <li>Real-time signal monitoring</li>
+        <li>Monthly Impact Report</li>
+      </ul>
+    </div>
+    <div class="tier">
+      <div class="tier-badge">Growth Tier</div>
+      <div class="tier-name">Trust + Talent Builder</div>
+      <div class="tier-price f-stat">$1,800–2,200<span>/mo</span></div>
+      <ul class="tier-features">
+        <li>Monthly owner interview + content</li>
+        <li>Employee spotlight series</li>
+        <li>AI avatar video — no camera required</li>
+        <li>Email newsletter to customer list</li>
+        <li>DM engagement automation — flows written in owner's voice, lead qualification, instant owner alert</li>
+        <li>Comment management — drafted responses in owner's voice within 24hrs</li>
+        <li>Hiring campaign automation</li>
+      </ul>
+    </div>
+    <div class="tier">
+      <div class="tier-badge">Authority Tier</div>
+      <div class="tier-name">Authority + Hiring System</div>
+      <div class="tier-price f-stat">$2,800–3,500<span>/mo</span></div>
+      <ul class="tier-features">
+        <li>AI podcast on all major platforms</li>
+        <li>Full hiring campaign management</li>
+        <li>Review velocity strategy</li>
+        <li>Win-back automation</li>
+        <li>Google Local Service Ads</li>
+      </ul>
+    </div>
+  </div>
+  <div class="callout-box fade d3">
+    <p><strong>One-time project fees build permanent assets clients own forever.</strong> Professional retargeting campaigns deliver conversion rates 70% higher than cold prospecting — making the ad creative and campaign builds in this list among the highest-ROI projects available. — brand identity and logo ($600–1,200), custom mascot character ($800–1,400), ebook production ($800–1,500), mini course creation ($1,500–2,500), ad creative packages ($400–600), and full hiring campaign builds ($400–600). Each one is charged once and creates compounding value long after it's built.</p>
+  </div>
+</section>
+
+<!-- NUMBERS -->
+<section id="numbers">
+  <div class="s-label fade"><span class="f-label" style="color:var(--gray);">The Numbers</span></div>
+  <h2 class="f-display fade">Three scenarios.<br><em>One number that matters.</em></h2>
+  <p class="fade d1">Every client compounds. Pilots upgrade to foundations. Foundations upgrade to systems. Monthly retainers stack. The exit trigger — full-time on this business — is $6,500/month held for three consecutive months.</p>
+  <div class="rev-table fade d2">
+    <div class="rev-head">
+      <div class="rh">Period</div>
+      <div class="rh con">Conservative</div>
+      <div class="rh base">Base Case</div>
+      <div class="rh str">Strong Case</div>
+    </div>
+    <div class="rev-row"><div class="rd period">Month 1–2</div><div class="rd con">$550 /mo</div><div class="rd base">$600–1,200 /mo</div><div class="rd str">$1,400–2,100 /mo</div></div>
+    <div class="rev-row"><div class="rd period">Month 3–4</div><div class="rd con">$650–1,300 /mo</div><div class="rd base">$1,500–2,250 /mo</div><div class="rd str">$4,000–6,000 /mo</div></div>
+    <div class="rev-row"><div class="rd period">Month 5–6</div><div class="rd con">$1,500–2,250 /mo</div><div class="rd base">$2,700–4,500 /mo</div><div class="rd str">$9,800–12,600 /mo ✓</div></div>
+    <div class="rev-milestone">
+      <div class="rv-label">6-Month Total Earned Income</div>
+      <div class="rv-label con">$6,800</div>
+      <div class="rv-label base">$12,750</div>
+      <div class="rv-label str">$35,900</div>
+    </div>
+    <div class="rev-row"><div class="rd period">Month 7–9</div><div class="rd con">$2,700–3,600 /mo</div><div class="rd base">$5,500–7,700 /mo</div><div class="rd str">$18,000–21,600 /mo</div></div>
+    <div class="rev-row"><div class="rd period">Month 10–12</div><div class="rd con">$4,000–6,000 /mo</div><div class="rd base">$9,100–11,700 /mo ✓</div><div class="rd str">$26,400–30,800 /mo</div></div>
+    <div class="rev-milestone">
+      <div class="rv-label">12-Month Total Earned Income</div>
+      <div class="rv-label con">$31,250</div>
+      <div class="rv-label base">$63,750</div>
+      <div class="rv-label str">$181,100</div>
+    </div>
+    <div class="rev-row"><div class="rd period er">Exit Month</div><div class="rd con er">Month 14–18</div><div class="rd base er">Month 10–12</div><div class="rd str er">Month 6–7</div></div>
+  </div>
+  <div class="exit-block fade d3">
+    <div class="exit-num f-stat">$6.5K<sub>/mo</sub></div>
+    <div class="exit-copy">
+      <h3>The Exit Trigger</h3>
+      <p>$6,500/month for three consecutive months. That's the moment the owner can exit his current job and this becomes the full-time business. Every section of the operating plan points at this number. The daily operating system tracks it every week without fail.
+    </div>
+  </div>
+  <div class="stat-grid gold-stats fade d4">
+    <div class="stat-cell"><div class="stat-num f-stat">71%</div><div class="stat-lbl">Of consumers are more likely to purchase when referred to a business via a social media recommendation</div></div>
+    <div class="stat-cell"><div class="stat-num f-stat">5×</div><div class="stat-lbl">The valuation multiple of a recurring revenue business vs a project-based agency</div></div>
+    <div class="stat-cell"><div class="stat-num f-stat">2.3 hrs</div><div class="stat-lbl">The average time a person spends on social media daily — the largest single block of discretionary attention available to any local business</div></div>
+    <div class="stat-cell"><div class="stat-num f-stat">30%</div><div class="stat-lbl">Conservative upsell rate — pilots convert to higher tiers as results compound</div></div>
+  </div>
+</section>
+
+<!-- ADVANTAGES -->
+<section id="advantages">
+  <div class="s-label fade"><span class="f-label" style="color:var(--gray);">Why This Wins</span></div>
+  <h2 class="f-display fade">Six reasons this works<br><em>where most agencies fail.</em></h2>
+  <div class="adv-grid fade d1">
+    <div class="adv"><div class="adv-n">01 — Acquisition</div><h3>The First Clients Are Already In The Room</h3><p>Most agencies spend six months cold-outreaching to find their first client. This founder walks into a room of warm, trusting business owners every week through an active BNI network — people who have already said they need exactly what he offers.</p></div>
+    <div class="adv"><div class="adv-n">02 — Domain Fluency</div><h3>He Knows This World From The Inside</h3><p>Three years as a President's Club B2B producer inside a local service business. He knows what a missed call costs, what a bad hire does to a team, and what it feels like to watch a weaker competitor get chosen first. That's not research. That's firsthand.</p></div>
+    <div class="adv"><div class="adv-n">03 — Differentiation</div><h3>The Argument No Other Agency Is Making</h3><p>Every local service business is bleeding money on bad hires. This is the only agency telling them that their social presence directly affects who applies — and how badly they want the job. One avoided bad hire pays for months of this service. Nobody else in the market is having that conversation.</p></div>
+    <div class="adv"><div class="adv-n">04 — Creative Edge</div><h3>Creative Taste That Can't Be Installed</h3><p>AI design tools are available to everyone. Knowing what great looks like is not. The founder has genuine creative talent and artistic instincts that direct those tools toward something others can't produce with the same software. Competitors can copy the tools. They can't copy the eye.</p></div>
+    <div class="adv"><div class="adv-n">05 — Scale</div><h3>Built to Serve More Without Breaking</h3><p>Most solo agencies hit a ceiling at 4–5 clients because everything is manual. This one is built differently — strategy, relationships, and quality control handled by the founder, while production runs efficiently in the background. The result is 10–15 client capacity at full quality. No burnout. No cut corners.</p></div>
+    <div class="adv"><div class="adv-n">06 — Revenue Depth</div><h3>A Service That Grows With Every Client</h3><p>Podcasts, ebooks, mini courses, and branded digital products give clients revenue streams they own forever. The more a client builds with this service, the more they have to lose by leaving. Retention isn't chased — it's engineered into the offer itself.</p></div>
+  </div>
+</section>
+
+<!-- PATH -->
+<section id="path">
+  <div class="s-label fade"><span class="f-label" style="color:var(--gray);">The Path</span></div>
+  <h2 class="f-display fade">Proof in 90 days.<br><em>Scale after that.</em></h2>
+  <p class="fade d1">The first 90 days have one job: prove the offer works. Not the prettiest brand. Not the most polished pitch deck. Real clients. Real results. Real proof that changes every subsequent conversation.</p>
+  <div class="timeline fade d2">
+    <div class="t-phase"><div class="t-lbl">Weeks 1–2</div><div class="t-title">Foundation</div><ul class="t-items"><li>Business name and domain</li><li>Minimum viable brand built</li><li>Onboarding kit completed</li><li>First BNI conversation with Visibility Report</li></ul></div>
+    <div class="t-phase"><div class="t-lbl">Weeks 3–4</div><div class="t-title">First Delivery</div><ul class="t-items"><li>First client onboarded</li><li>First content batch delivered</li><li>SOP built during real work</li><li>Report template created</li></ul></div>
+    <div class="t-phase"><div class="t-lbl">Month 2</div><div class="t-title">Consistency</div><ul class="t-items"><li>Deliver consistently, track time</li><li>Document before/after proof</li><li>Close second client if stable</li><li>Coach case study in progress</li></ul></div>
+    <div class="t-phase"><div class="t-lbl">Month 3</div><div class="t-title">Proof</div><ul class="t-items"><li>First Impact Report delivered</li><li>First testimonial collected</li><li>First upgrade conversation</li><li>Real traction established</li></ul></div>
+  </div>
+  <div class="why-list fade d3">
+    <div class="why-item"><div class="why-n f-label">01</div><div class="why-c"><h3>This plan has been tested harder than most funded startups</h3><p>Over 20 iterations reviewed by multiple AI systems in parallel. Every failure mode — split focus, inflated projections, no operating system, contradictions between the offer and the pitch — identified and resolved. This isn't a document that looks good. It's one built to hold up.</div></div>
+    <div class="why-item"><div class="why-n f-label">02</div><div class="why-c"><h3>A founding phase creates proof before it is needed</h3><p>Three invite-only founding clients receive a full premium package at a reduced rate in exchange for documented case studies. After those three engagements, real proof changes every subsequent sales conversation.</p></div></div>
+    <div class="why-item"><div class="why-n f-label">03</div><div class="why-c"><h3>There's a finish line — and everything points at it</h3><p>$6,500/month for three consecutive months — that's the exit number. The 90-day sprint, the upsell ladder, the daily operating system — every piece of the plan is structured around reaching that number. Most side businesses drift forever because nobody draws the line. This one is drawn.</div></div>
+    <div class="why-item"><div class="why-n f-label">04</div><div class="why-c"><h3>The window is open — and it won't stay that way</h3><p>Most local service businesses are still posting occasional before-and-after photos on a page nobody visits. The gap between what market leaders look like online and what the average business looks like is growing every month. The demand is rising. The supply of people who can actually deliver this is still limited. That combination doesn't last.</div></div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section id="closing">
+  <div class="s-label fade" style="justify-content:center;"><span class="f-label" style="color:var(--gray);">The Bottom Line</span></div>
+  <h2 class="f-display fade" style="font-size:clamp(28px,3.5vw,48px);text-align:center;">Recurring revenue.<br><span class="f-italic" style="color:var(--mint);">Permanent problem.</span><br>Warm market ready to buy.</h2>
+  <p class="fade d1" style="font-size:18px;max-width:520px;margin:0 auto;text-align:center;line-height:1.8;color:var(--body);">The clients are already in the room. The problem never goes away. The differentiation is real. The system is built to scale. The exit is defined.</p>
+  <div class="closing-stats fade d2">
+    <div class="cstat"><span class="num f-stat">30</span><span class="lbl">Days to first measurable results</span></div>
+    <div class="cstat"><span class="num f-stat">90%</span><span class="lbl">Gross margin after AI production tools</span></div>
+    <div class="cstat"><span class="num f-stat">33M+</span><span class="lbl">Local service businesses in the US fitting the ideal client profile</span></div>
+    <div class="cstat"><span class="num f-stat">87%</span><span class="lbl">Of local service businesses have no consistent content strategy</span></div>
+  </div>
+</section>
+
+<footer>
+  <div class="ft-brand">Local Visibility Partner</div>
+  <div class="ft-meta">April 2026 &nbsp;·&nbsp; Confidential Business Overview</div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); });
+},{threshold:0.08,rootMargin:'0px 0px -48px 0px'});
+document.querySelectorAll('.fade').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
